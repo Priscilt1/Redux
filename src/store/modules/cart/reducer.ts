@@ -11,7 +11,7 @@ const INITTIAL_STATE: ICartState = {
 const cart: Reducer<ICartState> = (state = INITTIAL_STATE, action) => {
   return produce(state, draft => { //draft - rascunho
   switch(action.type) {
-      case 'ADD_PRODUCT_TO_CART': {
+      case 'ADD_PRODUCT_TO_CART_SUCCESS': { //pq so quero adicionar o produto no carrinho quando passar
         const { product } = action.payload
 
         //para saber se o produto ja esta no carrinho antes de adicionar

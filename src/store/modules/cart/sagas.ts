@@ -1,9 +1,9 @@
 //configuração do card - saga
 import { all, takeLatest, select } from 'redux-saga/effects'
 import { IState } from '../..'
-import { addProductToCart } from './actions'
+import { addProductToCartRequest } from './actions'
 
-type CheckProductStockRequest = ReturnType<typeof addProductToCart>
+type CheckProductStockRequest = ReturnType<typeof addProductToCartRequest>
 
 function* checkProductStock({ payload }: CheckProductStockRequest) {
   //checar qual a quantidade de estoque que eu ja tenho no carrinho
@@ -17,5 +17,5 @@ function* checkProductStock({ payload }: CheckProductStockRequest) {
 }
 
 export default all([
-  takeLatest('ADD_PRODUCT_TO_CART', checkProductStock ) //passando qual ação e qual função
+  takeLatest('ADD_PRODUCT_TO_CART_REQUEST', checkProductStock ) //passando qual ação e qual função
 ])
