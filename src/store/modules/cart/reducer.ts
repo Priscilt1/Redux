@@ -14,11 +14,20 @@ const cart: Reducer<ICartState> = (state = INITTIAL_STATE, action) => {
       case 'ADD_PRODUCT_TO_CART': {
         const { product } = action.payload
 
+        //para saber se o produto ja esta no carrinho antes de adicionar
+        const productInCartIndex = draft.items.findIndex(item => 
+          item.product.id === product.id
+        )
+
+        if (productInCartIndex >= 0) {
+          draft.items[productInCartIndex].quantity++
+        } else {
           draft.items.push({ //atualizando o carrinho
             product,
             quantity: 1,
           }) 
-
+        }
+        
         break
       }
       default: {
