@@ -2,16 +2,17 @@
 //retorna os dadoscontidos dentro do estado
 import { Reducer } from 'redux'
 import produce from 'immer'
-import { ICartState } from './types'
+import { ActionTypes, ICartState } from './types'
 
 const INITTIAL_STATE: ICartState = { 
-  items: []
+  items: [],
+  failedStockCheck: []
 }
 
 const cart: Reducer<ICartState> = (state = INITTIAL_STATE, action) => {
   return produce(state, draft => { //draft - rascunho
   switch(action.type) {
-      case 'ADD_PRODUCT_TO_CART_SUCCESS': { //pq so quero adicionar o produto no carrinho quando passar
+      case ActionTypes.addProductToCartSuccess: { //pq so quero adicionar o produto no carrinho quando passar
         const { product } = action.payload
 
         //para saber se o produto ja esta no carrinho antes de adicionar
@@ -30,8 +31,8 @@ const cart: Reducer<ICartState> = (state = INITTIAL_STATE, action) => {
         
         break
       }
-      case 'ADD_PRODUCT_TO_CART_FAILURE': { //ouvindo a acao de falha
-        console.log('failure', action.payload)
+      case ActionTypes.addProductToCartFailure: { //ouvindo a acao de falha
+        draft.failedStockCheck.push(action.payload.productId)
 
         break
       }
